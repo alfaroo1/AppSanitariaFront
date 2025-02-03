@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Sanitaria - Index</title>
+    <link href="./output.css" rel="stylesheet">
+</head>
+<body>
+    <div class="w-[500px] h-[500px] flex flex-col items-center justify-center">
+        <h1 class="text-2xl text-bg-teal-200">Inicia Sesion</h1>
+        <form action="" class="border border-black flex flex-col items-center gap-7">
+            <!-- DATOS A RELLENAR -->
+            <input type="text" class="placeholder:text-teal-400 placeholder:border placeholder:border-bg-teal-400 text-bg-red" placeholder="Correo">
+            <input type="text" class="placeholder:text-teal-400 placeholder:border placeholder:border-bg-teal-400 text-bg-red" placeholder="Contraseña">
+            <!-- INFORMACIONO -->
+            <span class="login__infor-pass">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
+            <!-- LINK CONTRASEÑA OLVIDADA -->
+            <p class="login__pass-old">
+                <a href="#" class="login__pass-link">Olvidaste la contraseña...</a>
+            </p>
+            <!-- BUTTON LOGIN -->
+            <button class="bg-teal-400 rounded-md p-2 w-[100px]">Login</button>
+            <div class=""></div>
+            <!-- USUARIO REGISTRADO -->
+            <p class="login__user-register">Si no tienes cuenta...<a href="#" class="login__register-link">Registro</a></p>
+        </form>
+    </div>
+</body>
+</html>
