@@ -14,18 +14,17 @@
             <h1 class="mt-12 text-2xl">Inicia Sesion</h1>
             <form action="" class="flex flex-col items-center gap-5 mt-6">
                 <!-- DATOS A RELLENAR -->
-                <input type="text" class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
+                <input type="email" class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     placeholder="Correo">
-                <p class="flex">
-                    <input type="text"
+                <div class="flex items-center">
+                    <input type="password"
+                    id="login_password"
                         class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                         placeholder="Contraseña">
                     <!-- OJO ABIERTO -->
-                    <span class="mdi mdi-eye-outline"></span>
-                    <!-- OJO CERRADO -->
-                    <span class="hidden mdi mdi-eye-off-outline"></span>
-                </p>
-                <!-- INFORMACIONO -->
+                    <button id="login_show-pass"><span class="mdi mdi-eye-outline"></span></button>
+                </div>
+                <!-- INFORMACION -->
                 <span class="text-[0.65rem] mt-[-10px]">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
                 <!-- BUTTON LOGIN -->
                 <button id="btn_login" class="bg-teal-400 rounded-md p-2 w-[200px] hover:bg-teal-200">Login</button>
@@ -49,29 +48,25 @@
                 <input type="text"
                     class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     placeholder="Centro">
-                <input type="text"
+                <input type="email"
                     class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     placeholder="Correo">
-                <p>
-                    <input type="text"
+                <div class="flex items-center">
+                    <input type="password" id="register_password"
                         class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                         placeholder="Contraseña">
-                        <!-- OJO ABIERTO -->
-                    <span class="mdi mdi-eye-outline"></span>
-                    <!-- OJO CERRADO -->
-                    <span class="hidden mdi mdi-eye-off-outline"></span>
-                </p>
+                    <!-- OJO ABIERTO -->
+                    <button id="register_show-pass"><span class="mdi mdi-eye-outline"></span></button>
+                </div>
                 <!-- INFORMACION -->
                 <span class="text-[0.65rem] mt-[-10px]">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
-                <p>
-                    <input type="text"
+                <div class="flex items-center">
+                    <input type="password" id="register_password2"
                         class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
-                        placeholder="Reptir contraseña">
+                        placeholder="Contraseña">
                     <!-- OJO ABIERTO -->
-                    <span class="mdi mdi-eye-outline"></span>
-                    <!-- OJO CERRADO -->
-                    <span class="hidden mdi mdi-eye-off-outline"></span>
-                </p>
+                    <button id="register_show-pass2"><span class="mdi mdi-eye-outline"></span></button>
+                </div>
                 <!-- INFORMACION -->
                 <span class="text-[0.65rem] mt-[-10px]">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
                 <!-- BUTTON LOGIN -->
@@ -86,7 +81,7 @@
             <h1 class="mt-12 text-2xl">Recupera tu contraseña</h1>
             <form action="" class="flex flex-col items-center gap-5 mt-6">
                 <!-- DATOS A RELLENAR -->
-                <input type="text"
+                <input type="email"
                     class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     placeholder="Correo">
                 <!-- BUTTON LOGIN -->
