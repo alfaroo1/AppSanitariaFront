@@ -17,12 +17,140 @@
     <link rel="stylesheet" href="../assets/style/gestion.css">
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-teal-50 p-4">
 
-    
+    <!-- Container -->
+    <div class="max-w-screen-xl mx-auto bg-white shadow-lg rounded-lg p-4">
 
-    <!-- JS link -->
-    <script src="./js/script.js"></script>
+        <!-- Header -->
+        <header class="flex flex-wrap justify-between items-center gap-2 mb-4">
+            <select class="border border-teal-500 rounded-md p-2">
+                <option>Seleccionar un Órgano</option>
+            </select>
+            <input type="text" placeholder="Escanear QR" class="border border-teal-500 rounded-md p-2">
+            <input type="date" class="border border-teal-500 rounded-md p-2">
+            <input type="date" class="border border-teal-500 rounded-md p-2">
+        </header>
+        
+        <div class="grid md:grid-cols-3 gap-4">
+            <!-- Cassettes -->
+            <div class="md:col-span-2 bg-teal-100 p-4 rounded-lg">
+                <!-- Cassettes header-->
+                <div class="flex flex-wrap justify-between">
+                    <h2 class="text-xl font-semibold text-teal-700">Cassettes</h2>
+                    <div class="flex">
+                        <!-- Ícono de agregar archivo -->
+                        <div class="relative w-12 h-12 text-teal-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z"></path>
+                            </svg>
+                            <div class="absolute bottom-0 right-0 bg-white border-2 border-teal-600 rounded-full p-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-teal-600" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Ícono de duplicar -->
+                        <div class="w-12 h-12 text-teal-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+                                    <rect x="6" y="6" width="12" height="12" rx="2"></rect>
+                                    <rect x="9" y="9" width="12" height="12" rx="2" opacity="0.5"></rect>
+                                </svg>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Cassettes main-->
+                <div class="overflow-x-auto mt-2">
+                    <table class="w-full border border-teal-300">
+                        <thead>
+                            <tr class="bg-teal-200">
+                                <th class="p-2 border">Fecha</th>
+                                <th class="p-2 border">Descripción</th>
+                                <th class="p-2 border">Órgano</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border">
+                                <td class="p-2 border">21-02-2025</td>
+                                <td class="p-2 border">ADFAFSD</td>
+                                <td class="p-2 border">Bazo</td>
+                            </tr>
+                            <tr class="border">
+                                <td class="p-2 border">15-02-2025</td>
+                                <td class="p-2 border">Nuevo Cassette Modificado</td>
+                                <td class="p-2 border">Uña</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Detalles Cassette -->
+            <div class="bg-teal-100 p-4 rounded-lg">
+                <!-- Detalles Cassette header-->
+                <div class="flex flex-wrap justify-between">
+                    <h2 class="text-xl font-semibold text-teal-700">Detalle Cassette</h2>
+                    <div class="flex flex-wrap">
+                        <!-- Ícono de eliminar -->
+                        <div class="w-12 h-12 text-teal-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M6 7H18M9 7V5H15V7M10 11V17M14 11V17M4 7H20L19 20H5L4 7Z"></path>
+                            </svg>
+                        </div>
+
+                        <!-- Ícono de editar -->
+                        <div class="w-12 h-12 text-teal-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-12 h-12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M4 20H8L18 10L14 6L4 16V20Z"></path>
+                                <path d="M14 6L16 4L20 8L18 10L14 6Z"></path>
+                            </svg>
+                        </div>
+                    
+                    </div>
+                </div>
+                
+                <!-- Detalles Cassette main-->
+                <div>
+                    <p><strong>Descripción:</strong> <span class="text-gray-700">&lt;ZXC&lt;ZXC</span></p>
+                    <p><strong>Órgano:</strong> <span class="text-gray-700">Bazo</span></p>
+                    <p><strong>Fecha:</strong> <span class="text-gray-700">15-02-2025</span></p>
+                    <p><strong>Características:</strong> <span class="text-gray-700">&lt;ZXC&lt;ZXC</span></p>
+                    <p><strong>Observaciones:</strong> <span class="text-gray-700">c&lt;ZXC&lt;ZXC</span></p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Muestras -->
+        <div class="bg-teal-100 p-4 rounded-lg mt-4">
+            <!-- Muestras header-->
+            <div>
+                <h2 class="text-xl font-semibold text-teal-700">Muestras</h2>
+            </div>
+
+            <!-- Muestras body -->
+            <div class="overflow-x-auto mt-2">
+                <table class="w-full border border-teal-300">
+                    <thead>
+                        <tr class="bg-teal-200">
+                            <th class="p-2 border">Fecha</th>
+                            <th class="p-2 border">Descripción</th>
+                            <th class="p-2 border">Tinción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="3" class="p-2 border text-red-500 text-center">No se ha encontrado ninguna muestra</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+        </div>
+        
+    </div>
 </body>
 
 </html>
