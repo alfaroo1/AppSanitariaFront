@@ -3,5 +3,12 @@
 
 */
 
-
-
+.icono {
+    transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+.icono:hover {
+    transform: scale(1.1);
+}
+.icono:active {
+    transform: scale(1);
+}
