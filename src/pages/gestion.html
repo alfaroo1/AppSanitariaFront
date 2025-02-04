@@ -20,21 +20,21 @@
 <body class="bg-teal-50 p-4">
 
     <!-- Container -->
-    <div class="max-w-screen-xl mx-auto bg-white shadow-lg rounded-lg p-4">
+    <div id="container" class="max-w-screen-xl mx-auto bg-white shadow-lg rounded-lg p-4 h-auto">
 
         <!-- Header -->
-        <header class="flex flex-wrap justify-between items-center gap-2 mb-4">
-            <select class="border border-teal-500 rounded-md p-2">
+        <header class="flex flex-wrap justify-between items-center gap-2 mb-6">
+            <select class="border border-teal-500 rounded-md p-2 hover:bg-teal-100 hover:border-teal-700 focus:bg-teal-300">
                 <option>Seleccionar un Órgano</option>
             </select>
-            <input type="text" placeholder="Escanear QR" class="border border-teal-500 rounded-md p-2">
-            <input type="date" class="border border-teal-500 rounded-md p-2">
-            <input type="date" class="border border-teal-500 rounded-md p-2">
+            <input type="text" placeholder="Escanear QR" class="border border-teal-500 rounded-md p-2 hover:bg-teal-100 hover:border-teal-700 focus:bg-teal-300">
+            <input type="date" class="border border-teal-500 rounded-md p-2 hover:bg-teal-100 hover:border-teal-700 focus:bg-teal-300">
+            <input type="date" class="border border-teal-500 rounded-md p-2 hover:bg-teal-100 hover:border-teal-700 focus:bg-teal-300">
         </header>
         
         <div class="grid md:grid-cols-3 gap-4">
             <!-- Cassettes -->
-            <div class="md:col-span-2 bg-teal-100 p-4 rounded-lg">
+            <div class="md:col-span-2  p-4 rounded-lg shadow-lg border border-gray-200">
                 <!-- Cassettes header-->
                 <div class="flex flex-wrap justify-between">
                     <h2 class="text-xl font-semibold text-teal-700">Cassettes</h2>
@@ -89,7 +89,7 @@
             </div>
             
             <!-- Detalles Cassette -->
-            <div class="bg-teal-100 p-4 rounded-lg">
+            <div class="p-4 rounded-lg shadow-lg border border-gray-200">
                 <!-- Detalles Cassette header-->
                 <div class="flex flex-wrap justify-between">
                     <h2 class="text-xl font-semibold text-teal-700">Detalle Cassette</h2>
@@ -124,14 +124,14 @@
         </div>
         
         <!-- Muestras -->
-        <div class="bg-teal-100 p-4 rounded-lg mt-4">
+        <div class="p-4 rounded-lg mt-4 shadow-lg border border-gray-200">
             <!-- Muestras header-->
             <div>
                 <h2 class="text-xl font-semibold text-teal-700">Muestras</h2>
             </div>
 
             <!-- Muestras body -->
-            <div class="overflow-x-auto mt-2">
+            <div class="overflow-x-auto mt-2 h-auto">
                 <table class="w-full border border-teal-300">
                     <thead>
                         <tr class="bg-teal-200">
