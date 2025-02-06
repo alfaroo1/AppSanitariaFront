@@ -1,7 +1,3 @@
-/*
-    JavaScript de gestion.html
-*/
-
 // Cargar elementos del DOM
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
@@ -16,20 +12,25 @@ const descripcionInput = document.getElementById("descripcionInput");
 const fechaInput = document.getElementById("fechaInput");
 const organoInput = document.getElementById("organoInput");
 
-// Función para abrir añadir Cassettes
+const ordenarFechaBtn = document.getElementById("ordenarFecha");
+const ordenarDescripcionBtn = document.getElementById("ordenarDescripcion");
+const ordenarOrganoBtn = document.getElementById("ordenarOrgano");
+const filtrarOrgano = document.getElementById("filtrarOrgano");
+
+let ordenAscendente = true; // Estado para ordenar
+
+// Función para abrir el modal
 const abrirModal = () => {
     modalOverlay.classList.remove("hidden");
     modal.classList.remove("hidden");
-
     setTimeout(() => {
         modalContent.classList.remove("scale-95", "opacity-0");
     }, 10);
 };
 
-// Función para cerrar añadir Cassettes
+// Función para cerrar el modal
 const cerrarModal = () => {
     modalContent.classList.add("scale-95", "opacity-0");
-
     setTimeout(() => {
         modalOverlay.classList.add("hidden");
         modal.classList.add("hidden");
@@ -37,39 +38,19 @@ const cerrarModal = () => {
     }, 300);
 };
 
-// Función para marcar errores en los campos vacíos
-const marcarError = (input) => {
-    input.classList.add("border-red-500", "bg-red-100");
-};
-
-// Función para limpiar errores cuando el usuario escribe en un campo
-const limpiarErrorCampo = (input) => {
-    input.classList.remove("border-red-500", "bg-red-100");
-};
-
-// Función para limpiar errores en todos los campos
-const limpiarErrores = () => {
-    [descripcionInput, fechaInput, organoInput].forEach((input) => limpiarErrorCampo(input));
-};
-
-// Función para validar el formulario de añadir Cassette
+// Función para validar y enviar formulario
 const enviarFormulario = (event) => {
     event.preventDefault();
 
-    const descripcion = document.getElementById("descripcionInput").value.trim();
-    const fecha = document.getElementById("fechaInput").value.trim();
-    const organo = document.getElementById("organoInput").value.trim();
-    const caracteristicas = document.getElementById("caracteristicasInput").value.trim();
-    const observaciones = document.getElementById("observacionesInput").value.trim();
+    const descripcion = descripcionInput.value.trim();
+    const fecha = fechaInput.value.trim();
+    const organo = organoInput.value.trim();
 
-    // Validación de campos obligatorios
-    //! if (!descripcion || !fecha || !organo || !caracteristicas || !observaciones) {
     if (!descripcion || !fecha || !organo) {
         errorMessage.textContent = "Rellena los campos obligatorios";
-        return; // No permite continuar si faltan datos
+        return;
     }
 
-    // Crear nueva fila en la tabla
     const newRow = document.createElement("tr");
     newRow.classList.add("border-b");
     newRow.innerHTML = `
@@ -86,15 +67,44 @@ const enviarFormulario = (event) => {
     `;
 
     cassetteTableBody.appendChild(newRow);
-
-    // Cerrar modal después de enviar
     cerrarModal();
     cassetteForm.reset();
 };
 
-// Event Listeners al final
+// Función para ordenar cualquier columna
+const ordenarTabla = (columna) => {
+    let filas = Array.from(cassetteTableBody.children);
+
+    filas.sort((a, b) => {
+        let valorA = a.cells[columna].textContent.toLowerCase();
+        let valorB = b.cells[columna].textContent.toLowerCase();
+
+        return ordenAscendente ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
+    });
+
+    ordenAscendente = !ordenAscendente;
+    cassetteTableBody.innerHTML = "";
+    filas.forEach(fila => cassetteTableBody.appendChild(fila));
+};
+
+// Función para filtrar la tabla por órgano
+const filtrarPorOrgano = () => {
+    let filtro = filtrarOrgano.value;
+    let filas = Array.from(cassetteTableBody.children);
+
+    filas.forEach(fila => {
+        let organo = fila.cells[2].textContent;
+        fila.style.display = (filtro === "" || organo === filtro) ? "" : "none";
+    });
+};
+
+// Event Listeners
 document.addEventListener("DOMContentLoaded", () => {
     openModalBtn.addEventListener("click", abrirModal);
     closeModalBtn.addEventListener("click", cerrarModal);
     cassetteForm.addEventListener("submit", enviarFormulario);
+    ordenarFechaBtn.addEventListener("click", () => ordenarTabla(0));
+    ordenarDescripcionBtn.addEventListener("click", () => ordenarTabla(1));
+    ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
+    filtrarOrgano.addEventListener("change", filtrarPorOrgano);
 });
