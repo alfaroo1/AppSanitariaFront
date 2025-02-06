@@ -17,7 +17,11 @@ const ordenarDescripcionBtn = document.getElementById("ordenarDescripcion");
 const ordenarOrganoBtn = document.getElementById("ordenarOrgano");
 const filtrarOrgano = document.getElementById("filtrarOrgano");
 
-let ordenAscendente = true; // Estado para ordenar
+const fechaInicio = document.getElementById("fechaInicio");
+const fechaFin = document.getElementById("fechaFin");
+
+
+let ordenAscendente = true;
 
 // Función para abrir el modal
 const abrirModal = () => {
@@ -46,11 +50,13 @@ const enviarFormulario = (event) => {
     const fecha = fechaInput.value.trim();
     const organo = organoInput.value.trim();
 
+    // Verificación de los campos obligatorios
     if (!descripcion || !fecha || !organo) {
         errorMessage.textContent = "Rellena los campos obligatorios";
         return;
     }
 
+    // Crear línea con los datos insertados
     const newRow = document.createElement("tr");
     newRow.classList.add("border-b");
     newRow.innerHTML = `
@@ -72,6 +78,7 @@ const enviarFormulario = (event) => {
 };
 
 // Función para ordenar cualquier columna
+//! Dar una vuelta a esto
 const ordenarTabla = (columna) => {
     let filas = Array.from(cassetteTableBody.children);
 
@@ -87,6 +94,11 @@ const ordenarTabla = (columna) => {
     filas.forEach(fila => cassetteTableBody.appendChild(fila));
 };
 
+
+/* ################################
+   ###   Funciones del Header   ###
+   ##############################*/
+//! Revisar funcionamiento
 // Función para filtrar la tabla por órgano
 const filtrarPorOrgano = () => {
     let filtro = filtrarOrgano.value;
@@ -97,14 +109,46 @@ const filtrarPorOrgano = () => {
         fila.style.display = (filtro === "" || organo === filtro) ? "" : "none";
     });
 };
+//! Revisar funcionamiento
+// Función para filtrar por fecha o rango de fechas
+const filtrarPorFecha = () => {
+    let fechaInicial = fechaInicio.value ? new Date(fechaInicio.value) : null;
+    let fechaFinal = fechaFin.value ? new Date(fechaFin.value) : null;
+
+    let filas = Array.from(cassetteTableBody.children);
+
+    filas.forEach(fila => {
+        let fechaCassette = new Date(fila.cells[0].textContent);
+
+        // Si solo hay fecha de inicio, mostrar solo esa fecha exacta
+        if (fechaInicial && !fechaFinal) {
+            fila.style.display = fechaCassette.toDateString() === fechaInicial.toDateString() ? "" : "none";
+        }
+        // Si hay fecha de inicio y fecha de fin, mostrar el rango
+        else if (fechaInicial && fechaFinal) {
+            let enRango = fechaCassette >= fechaInicial && fechaCassette <= fechaFinal;
+            fila.style.display = enRango ? "" : "none";
+        } 
+        // Si no hay fecha seleccionada, mostrar todo
+        else {
+            fila.style.display = "";
+        }
+    });
+};
+
+// Event Listeners para los inputs de fecha
+fechaInicio.addEventListener("change", filtrarPorFecha);
+fechaFin.addEventListener("change", filtrarPorFecha);
+
+
 
 // Event Listeners
-document.addEventListener("DOMContentLoaded", () => {
-    openModalBtn.addEventListener("click", abrirModal);
-    closeModalBtn.addEventListener("click", cerrarModal);
-    cassetteForm.addEventListener("submit", enviarFormulario);
-    ordenarFechaBtn.addEventListener("click", () => ordenarTabla(0));
-    ordenarDescripcionBtn.addEventListener("click", () => ordenarTabla(1));
-    ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
-    filtrarOrgano.addEventListener("change", filtrarPorOrgano);
-});
+openModalBtn.addEventListener("click", abrirModal);
+closeModalBtn.addEventListener("click", cerrarModal);
+cassetteForm.addEventListener("submit", enviarFormulario);
+filtrarOrgano.addEventListener("change", filtrarPorOrgano);
+ordenarFechaBtn.addEventListener("click", () => ordenarTabla(0));
+ordenarDescripcionBtn.addEventListener("click", () => ordenarTabla(1));
+ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
+fechaInicio.addEventListener("change", filtrarPorFecha);
+fechaFin.addEventListener("change", filtrarPorFecha);
