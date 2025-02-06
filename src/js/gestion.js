@@ -19,6 +19,8 @@ const modalOverlay = document.getElementById("modal-overlay");
 const descripcionInput = document.getElementById("descripcionInput");
 const fechaInput = document.getElementById("fechaInput");
 const organoInput = document.getElementById("organoInput");
+const caracteristicasInput = document.getElementById("caracteristicasInput");
+const observacionesInput = document.getElementById("observacionesInput");
 
 const cassetteForm = document.getElementById("cassetteForm");
 const cassetteTableBody = document.getElementById("cassetteTableBody");
@@ -75,21 +77,26 @@ const enviarFormulario = (event) => {
     const fecha = fechaInput.value.trim();
     const organo = organoInput.value.trim();
 
-    // Verificación de los campos obligatorios
     if (!descripcion || !fecha || !organo) {
         errorMessage.textContent = "Rellena los campos obligatorios";
         return;
     }
 
-    // Crear línea con los datos insertados
     const newRow = document.createElement("tr");
     newRow.classList.add("border-b");
+    
+    const caracteristicas = caracteristicasInput.value.trim() || "Información no disponible";
+    const observaciones = observacionesInput.value.trim() || "Sin observaciones";
+    
+    newRow.setAttribute("data-caracteristicas", caracteristicas);
+    newRow.setAttribute("data-observaciones", observaciones);
+    
     newRow.innerHTML = `
         <td class="p-2">${fecha}</td>
         <td class="p-2">${descripcion}</td>
         <td class="p-2">${organo}</td>
         <td class="p-2">
-            <div class="relative w-8 h-8 text-teal-500">
+            <div class="relative w-8 h-8 text-teal-500 detalle-cassette cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-teal-600 icono hover:text-teal-400 active:text-teal-700" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z"></path>
                 </svg>
@@ -100,6 +107,7 @@ const enviarFormulario = (event) => {
     cassetteTableBody.appendChild(newRow);
     cerrarModal();
     cassetteForm.reset();
+    agregarEventosDetalle();
 };
 
 
@@ -166,6 +174,32 @@ const ordenarTabla = (columna) => {
     filas.forEach(fila => cassetteTableBody.appendChild(fila));
 };
 
+// Función para actualizar el detalle del cassette seleccionado
+const mostrarDetallesCassette = (fila) => {
+
+    // Actualizar la sección de detalles
+    detalleDescripcion.textContent = fila.cells[1].textContent;
+    detalleFecha.textContent = fila.cells[0].textContent;
+    detalleOrgano.textContent = fila.cells[2].textContent;
+    detalleCaracteristicas.innerText = fila.getAttribute("data-caracteristicas") || "Información no disponible";
+    detalleObservaciones.innerText = fila.getAttribute("data-observaciones") || "Sin observaciones";    
+
+    // Resaltar la fila seleccionada
+    document.querySelectorAll("#cassetteTableBody tr").forEach(row => row.classList.remove("bg-teal-100"));
+    fila.classList.add("bg-teal-100");
+};
+
+// Función para agregar el evento de clic en el ícono de cada fila
+const agregarEventosDetalle = () => {
+    document.querySelectorAll("#cassetteTableBody tr").forEach(fila => {
+        const botonDetalle = fila.querySelector(".detalle-cassette");
+        if (botonDetalle) {
+            botonDetalle.addEventListener("click", () => mostrarDetallesCassette(fila));
+        }
+    });
+};
+
+
 
 /* ###########################
    ###   Event Listeners   ###
@@ -190,3 +224,6 @@ ordenarFechaBtn.addEventListener("click", () => ordenarTabla(0));
 ordenarDescripcionBtn.addEventListener("click", () => ordenarTabla(1));
 ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
 
+document.addEventListener("DOMContentLoaded", () => {
+    agregarEventosDetalle();
+});

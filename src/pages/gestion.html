@@ -85,50 +85,55 @@
             <!-- Detalles Cassette -->
             <div class="p-4 rounded-lg shadow-lg border border-gray-200">
                 <!-- Detalles Cassette header-->
-                <div class="flex flex-wrap justify-between">
+                <div class="flex justify-between items-center">
                     <h2 class="text-xl font-semibold text-teal-700">Detalle Cassette</h2>
-                    <div class="flex flex-wrap">
+                    <div class="flex space-x-2">
                         <!-- Ícono de eliminar -->
-                        <div class="w-8 h-8 text-teal-600 icono hover:text-teal-400 active:text-teal-700">
+                        <div class="w-8 h-8 text-teal-600 hover:text-teal-400 active:text-teal-700 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6 7H18M9 7V5H15V7M10 11V17M14 11V17M4 7H20L19 20H5L4 7Z"></path>
                             </svg>
                         </div>
-
                         <!-- Ícono de editar-->
-                        <div class="w-8 h-8 text-teal-600 icono hover:text-teal-400 active:text-teal-700">
+                        <div class="w-8 h-8 text-teal-600 hover:text-teal-400 active:text-teal-700 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M4 20H8L18 10L14 6L4 16V20Z"></path>
                                 <path d="M14 6L16 4L20 8L18 10L14 6Z"></path>
                             </svg>
                         </div>
-                    
                     </div>
                 </div>
-                
-                <!-- Detalles Cassette main-->
-                <div class="bg-white p-6 rounded-lg shadow-sm space-y-6 text-gray-700">
-                    <div class="border-b border-gray-300 pb-4">
-                        <p class="font-bold uppercase">Descripción:</p>
-                        <p id="descripcion" class="text-gray-600"></p>
+
+                <!-- Contenido del Detalle Cassette -->
+                <div class="bg-white p-6 rounded-lg shadow-sm space-y-4 text-gray-700">
+                    
+                    <div class="border-b border-gray-300 pb-3">
+                        <p class="font-bold uppercase text-sm">Descripción:</p>
+                        <p id="descripcion" class="text-gray-600 break-words"></p>
+                    </div>
+
+                    <!-- Contenedor de Órgano y Fecha con flex -->
+                    <div class="border-b border-gray-300 pb-3 flex justify-between items-center flex-wrap">
+                        <div class="flex-1 min-w-0">
+                            <p class="font-bold uppercase text-sm">Órgano:</p>
+                            <p id="organo" class="text-gray-600 truncate"></p>
+                        </div>
+                        <div class="flex-1 min-w-0 text-right">
+                            <p class="font-bold uppercase text-sm">Fecha:</p>
+                            <p id="fecha" class="text-gray-600 truncate"></p>
+                        </div>
+                    </div>
+
+                    <div class="border-b border-gray-300 pb-3">
+                        <p class="font-bold uppercase text-sm">Características:</p>
+                        <p id="caracteristicas" class="text-gray-600 break-words"></p>
+                    </div>
+
+                    <div>
+                        <p class="font-bold uppercase text-sm">Observaciones:</p>
+                        <p id="observaciones" class="text-gray-600 break-words"></p>
                     </div>
                     
-                    <div class="flex justify-between items-center border-b border-gray-300 pb-4">
-                        <div class="flex gap-4">
-                            <p class="font-bold uppercase">Órgano:</p>
-                            <p id="organo" class="text-gray-600"></p>
-                        </div>
-                        <div class="flex gap-4">
-                            <p class="font-bold uppercase">Fecha:</p>
-                            <p id="fecha" class="text-gray-600"></p>
-                        </div>
-                    </div>
-                    
-                    <p class="font-bold uppercase">Características:</p>
-                    <p id="caracteristicas" class="text-gray-600"></p>
-                    
-                    <p class="font-bold uppercase">Observaciones:</p>
-                    <p id="observaciones" class="text-gray-600"></p>
                 </div>
             </div>
 
