@@ -52,7 +52,7 @@
                 </div>
 
                 <!-- Cassettes main-->
-                <div class="overflow-x-auto mt-2">
+                <div class="overflow-y-auto h-64 mt-2">
                     <table class="w-full border border-teal-300">
                         <thead>
                             <tr class="bg-teal-200">
@@ -178,7 +178,7 @@
         <div id="modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden"></div>
         <!-- Modal de formulario -->
         <div id="modal" class="fixed inset-0 flex items-center justify-center hidden">
-            <div id="modal-content" class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full transform scale-95 opacity-0 transition-all duration-300">
+            <div id="modal-content" class="bg-white p-6 rounded-lg shadow-lg w-[500px] max-w-full transform scale-95 opacity-0 transition-all duration-300">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold text-teal-700">Nuevo Cassette</h2>
                     <button id="closeModalBtn" class="text-gray-600 hover:text-gray-800">&times;</button>
@@ -188,7 +188,7 @@
                     <div class="flex gap-4 mb-3">
                         <input type="date" id="fechaInput" class="w-1/2 p-2 border rounded-md">
                         <select id="organoInput" class="w-1/2 p-2 border rounded-md">
-                            <option value="" disabled selected>Órgano *</option>
+                            <option value="" disabled selected>Seleccionar Órgano *</option>
                             <option>Bazo</option>
                             <option>Hígado</option>
                         </select>
@@ -203,6 +203,7 @@
                 </form>
             </div>
         </div>
+
 
 
         
