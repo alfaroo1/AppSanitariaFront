@@ -56,9 +56,9 @@
                     <table class="w-full border border-teal-300">
                         <thead>
                             <tr class="bg-teal-200">
-                                <th class="p-2 border-b">Fecha</th>
-                                <th class="p-2 border-b">Descripción</th>
-                                <th class="p-2 border-b">Órgano</th>
+                                <th class="p-2 border-b hover:bg-teal-300 text-start">Fecha</th>
+                                <th class="p-2 border-b hover:bg-teal-300 text-start">Descripción</th>
+                                <th class="p-2 border-b hover:bg-teal-300 text-start">Órgano</th>
                                 <th class="p-2 border-b"></th>
                             </tr>
                         </thead>
@@ -173,30 +173,39 @@
         </div>
 
 
+        <!-- Formulario de añadir Cassettes -->
+        <!-- Fondo grisacio -->
+        <div id="modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden"></div>
         <!-- Modal de formulario -->
-        <div id="modal" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center hidden">
-            <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
-                <div class="flex justify-between items-center mb-4">
+        <div id="modal" class="fixed inset-0 flex items-center justify-center hidden">
+            <div id="modal-content" class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full transform scale-95 opacity-0 transition-all duration-300">
+                <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl font-semibold text-teal-700">Nuevo Cassette</h2>
                     <button id="closeModalBtn" class="text-gray-600 hover:text-gray-800">&times;</button>
                 </div>
                 <form id="cassetteForm">
-                    <input type="text" id="descripcionInput" placeholder="Descripción Corta" class="w-full p-2 border rounded-md mb-2">
-                    <div class="flex gap-2">
+                    <input type="text" id="descripcionInput" placeholder="Descripción Corta *" class="w-full p-2 border rounded-md mb-4">
+                    <div class="flex gap-4 mb-3">
                         <input type="date" id="fechaInput" class="w-1/2 p-2 border rounded-md">
                         <select id="organoInput" class="w-1/2 p-2 border rounded-md">
-                            <option value="">Seleccionar Órgano</option>
+                            <option value="" disabled selected>Órgano *</option>
                             <option>Bazo</option>
                             <option>Hígado</option>
                         </select>
                     </div>
                     <textarea id="caracteristicasInput" placeholder="Características" class="w-full p-2 border rounded-md"></textarea>
                     <textarea id="observacionesInput" placeholder="Observaciones" class="w-full p-2 border rounded-md"></textarea>
+                    
+                    <!-- Mensaje de error -->
+                    <p id="error-message" class="text-red-500 text-sm mt-2"></p>
+                    
                     <button type="submit" class="w-full bg-teal-500 text-white p-2 rounded-md hover:bg-teal-700 mt-4">Crear Cassette</button>
                 </form>
             </div>
         </div>
 
+
+        
     </div>
     <script src="../js/gestion.js"></script>
 </body>
