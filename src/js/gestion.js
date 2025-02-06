@@ -1,29 +1,54 @@
-// Cargar elementos del DOM
+/*
+    JavaScript general de gestion.html
+
+*/
+
+
+/* #############################
+   ###   Elementos del DOM   ###
+   ###########################*/
+
+// Modal Añadir Cassette
+const modal = document.getElementById("modal");
+const modalContent = document.getElementById("modal-content");
+
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
 const modalOverlay = document.getElementById("modal-overlay");
-const modal = document.getElementById("modal");
-const modalContent = document.getElementById("modal-content");
-const cassetteForm = document.getElementById("cassetteForm");
-const cassetteTableBody = document.getElementById("cassetteTableBody");
-const errorMessage = document.getElementById("error-message");
 
 const descripcionInput = document.getElementById("descripcionInput");
 const fechaInput = document.getElementById("fechaInput");
 const organoInput = document.getElementById("organoInput");
 
+const cassetteForm = document.getElementById("cassetteForm");
+const cassetteTableBody = document.getElementById("cassetteTableBody");
+const errorMessage = document.getElementById("error-message");
+
+// Botones Cassette
 const ordenarFechaBtn = document.getElementById("ordenarFecha");
 const ordenarDescripcionBtn = document.getElementById("ordenarDescripcion");
 const ordenarOrganoBtn = document.getElementById("ordenarOrgano");
-const filtrarOrgano = document.getElementById("filtrarOrgano");
 
+// Inputs y select Header
+const filtrarOrgano = document.getElementById("filtrarOrgano");
 const fechaInicio = document.getElementById("fechaInicio");
 const fechaFin = document.getElementById("fechaFin");
 
+// Detalle del cassette
+const detalleDescripcion = document.getElementById("descripcion");
+const detalleFecha = document.getElementById("fecha");
+const detalleOrgano = document.getElementById("organo");
+const detalleCaracteristicas = document.getElementById("caracteristicas");
+const detalleObservaciones = document.getElementById("observaciones");
 
 let ordenAscendente = true;
 
-// Función para abrir el modal
+
+/* ###############################################
+   ###   Funcines del Modal Añadir Cassettes   ###
+   #############################################*/
+
+// Función para abrir el modal de añadir cassettes
 const abrirModal = () => {
     modalOverlay.classList.remove("hidden");
     modal.classList.remove("hidden");
@@ -42,7 +67,7 @@ const cerrarModal = () => {
     }, 300);
 };
 
-// Función para validar y enviar formulario
+// Función para validar y enviar formulario del modal de añadir cassettes
 const enviarFormulario = (event) => {
     event.preventDefault();
 
@@ -77,27 +102,11 @@ const enviarFormulario = (event) => {
     cassetteForm.reset();
 };
 
-// Función para ordenar cualquier columna
-//! Dar una vuelta a esto
-const ordenarTabla = (columna) => {
-    let filas = Array.from(cassetteTableBody.children);
-
-    filas.sort((a, b) => {
-        let valorA = a.cells[columna].textContent.toLowerCase();
-        let valorB = b.cells[columna].textContent.toLowerCase();
-
-        return ordenAscendente ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
-    });
-
-    ordenAscendente = !ordenAscendente;
-    cassetteTableBody.innerHTML = "";
-    filas.forEach(fila => cassetteTableBody.appendChild(fila));
-};
-
 
 /* ################################
    ###   Funciones del Header   ###
    ##############################*/
+
 //! Revisar funcionamiento
 // Función para filtrar la tabla por órgano
 const filtrarPorOrgano = () => {
@@ -136,19 +145,48 @@ const filtrarPorFecha = () => {
     });
 };
 
+/* ################################
+   ###   Funciones de Cassette  ###
+   ##############################*/
+
+// Función para ordenar cualquier columna
+//! Dar una vuelta a esto
+const ordenarTabla = (columna) => {
+    let filas = Array.from(cassetteTableBody.children);
+
+    filas.sort((a, b) => {
+        let valorA = a.cells[columna].textContent.toLowerCase();
+        let valorB = b.cells[columna].textContent.toLowerCase();
+
+        return ordenAscendente ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
+    });
+
+    ordenAscendente = !ordenAscendente;
+    cassetteTableBody.innerHTML = "";
+    filas.forEach(fila => cassetteTableBody.appendChild(fila));
+};
+
+
+/* ###########################
+   ###   Event Listeners   ###
+   #########################*/
+
 // Event Listeners para los inputs de fecha
 fechaInicio.addEventListener("change", filtrarPorFecha);
 fechaFin.addEventListener("change", filtrarPorFecha);
 
-
-
-// Event Listeners
+// Event Listeners para el modal de añadir cassettes
 openModalBtn.addEventListener("click", abrirModal);
 closeModalBtn.addEventListener("click", cerrarModal);
 cassetteForm.addEventListener("submit", enviarFormulario);
+
+// Event Listener para ordenar cassettes en el Header
 filtrarOrgano.addEventListener("change", filtrarPorOrgano);
+fechaInicio.addEventListener("change", filtrarPorFecha);
+fechaFin.addEventListener("change", filtrarPorFecha);
+
+// Event Listener para ordenar cassettes en la cabecera de cassettes
 ordenarFechaBtn.addEventListener("click", () => ordenarTabla(0));
 ordenarDescripcionBtn.addEventListener("click", () => ordenarTabla(1));
 ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
-fechaInicio.addEventListener("change", filtrarPorFecha);
-fechaFin.addEventListener("change", filtrarPorFecha);
+
