@@ -70,7 +70,7 @@ const abrirModal = () => {
 
 // Función para cerrar el modal
 const cerrarModal = () => {
-    modalContent.classList.add("scale-95", "opacity-0");
+    modalContent.classList.add("scale-95");
     setTimeout(() => {
         modalOverlay.classList.add("hidden");
         modal.classList.add("hidden");
@@ -124,36 +124,53 @@ const enviarFormulario = (event) => {
    ###   Funciones del Header   ###
    ##############################*/
 
-//! Revisar funcionamiento
 // Función para filtrar la tabla por órgano
 const filtrarPorOrgano = () => {
     let filtro = filtrarOrgano.value;
+    // Obtiene todas las filas y las pasa a un array
     let filas = Array.from(cassetteTableBody.children);
 
     filas.forEach(fila => {
+        // Obtiene el contenido de la tercera celda (los organos)
         let organo = fila.cells[2].textContent;
-        fila.style.display = (filtro === "" || organo === filtro) ? "" : "none";
+        // Comprobar si hay filtro o si coincide con el órgano
+        if (filtro === "" || organo === filtro) {
+            // Mostrar las filas que coincidan con el filtro
+            fila.style.display = "";
+        } else {
+            // Si la fila no coincide se oculta
+            fila.style.display = "none";
+        }
+
     });
 };
-//! Revisar funcionamiento
+
 // Función para filtrar por fecha o rango de fechas
 const filtrarPorFecha = () => {
-    let fechaInicial = fechaInicio.value ? new Date(fechaInicio.value) : null;
-    let fechaFinal = fechaFin.value ? new Date(fechaFin.value) : null;
-
+    // Convertir los valores de los inptus en objetos date
+    let fechaInicial = null;
+    let fechaFinal = null;
+    
+    if (fechaInicio.value) {
+        fechaInicial = new Date(fechaInicio.value);
+    }
+    
+    if (fechaFin.value) {
+        fechaFinal = new Date(fechaFin.value);
+    }
+    // Obtiene todas las filas en un array
     let filas = Array.from(cassetteTableBody.children);
-
+    // Obtiene la fecha de cada cassette
     filas.forEach(fila => {
         let fechaCassette = new Date(fila.cells[0].textContent);
 
         // Si solo hay fecha de inicio, mostrar solo esa fecha exacta
-        if (fechaInicial && !fechaFinal) {
-            fila.style.display = fechaCassette.toDateString() === fechaInicial.toDateString() ? "" : "none";
+        if (fechaInicial && !fechaFinal && fechaCassette.toDateString() !== fechaInicial.toDateString()) {
+            fila.style.display = "none";
         }
         // Si hay fecha de inicio y fecha de fin, mostrar el rango
-        else if (fechaInicial && fechaFinal) {
-            let enRango = fechaCassette >= fechaInicial && fechaCassette <= fechaFinal;
-            fila.style.display = enRango ? "" : "none";
+        else if (fechaInicial && fechaFinal && (fechaCassette < fechaInicial || fechaCassette > fechaFinal)) {
+            fila.style.display = "none";
         } 
         // Si no hay fecha seleccionada, mostrar todo
         else {
@@ -167,21 +184,23 @@ const filtrarPorFecha = () => {
    ##############################*/
 
 // Función para ordenar cualquier columna
-//! Dar una vuelta a esto
 const ordenarTabla = (columna) => {
-    let filas = Array.from(cassetteTableBody.children);
+    // Obtener todas las filas y pasarlo a un array
+    const filas = [...cassetteTableBody.children];
 
-    filas.sort((a, b) => {
-        let valorA = a.cells[columna].textContent.toLowerCase();
-        let valorB = b.cells[columna].textContent.toLowerCase();
-
-        return ordenAscendente ? valorA.localeCompare(valorB) : valorB.localeCompare(valorA);
-    });
-
+    // Ordenar el array de filas ordenando de A a Z y vicebersa 
+    /* (Primero se obtiene el texto de la celda en la columna seleccionada y luego 
+       localeCompare compara las cadenas de texto) */
+    filas.sort((a, b) => 
+        ordenAscendente 
+            ? a.cells[columna].textContent.localeCompare(b.cells[columna].textContent)
+            : b.cells[columna].textContent.localeCompare(a.cells[columna].textContent)
+    );
+    // Invierte el orden para que pase de A a Z, a Z a A
     ordenAscendente = !ordenAscendente;
-    cassetteTableBody.innerHTML = "";
-    filas.forEach(fila => cassetteTableBody.appendChild(fila));
+    cassetteTableBody.replaceChildren(...filas);
 };
+
 
 // Función para actualizar el detalle del cassette seleccionado
 const mostrarDetallesCassette = (fila) => {
@@ -219,20 +238,21 @@ const agregarEventosDetalle = () => {
 const abrirModalEliminar = () => {
     if (!cassetteSeleccionado || !modalEliminar) return;
     modalEliminar.classList.remove("hidden");
-    modalOverlay.classList.remove("hidden"); // Mostrar el fondo grisáceo
+    modalOverlay.classList.remove("hidden");
 };
 
 // Función para cerrar el modal de eliminar
 const cerrarModalEliminar = () => {
     modalEliminar.classList.add("hidden");
-    modalOverlay.classList.add("hidden"); // Ocultar el fondo grisáceo
+    modalOverlay.classList.add("hidden");
 };
 
 // Función para eliminar cassette
 const eliminarCassette = () => {
+    // Verificar si el cassete seleccionado existe
     if (!cassetteSeleccionado) return;
     
-    if (cassetteSeleccionado === document.querySelector(".bg-teal-100")) {
+    if (cassetteSeleccionado.classList.contains("bg-teal-100")) {
         detalleDescripcion.textContent = "";
         detalleFecha.textContent = "";
         detalleOrgano.textContent = "";
@@ -248,8 +268,9 @@ const eliminarCassette = () => {
 
 // Función para abrir el modal de editar
 const abrirModalEditar = () => {
+    // Verificar si el cassete seleccionado y el modal existe
     if (!cassetteSeleccionado || !modalEditar) return;
-    
+    // Rellenar campos del modal
     document.getElementById("editarDescripcion").value = cassetteSeleccionado.cells[1].textContent;
     document.getElementById("editarFecha").value = cassetteSeleccionado.cells[0].textContent;
     document.getElementById("editarOrgano").value = cassetteSeleccionado.cells[2].textContent;
@@ -257,21 +278,22 @@ const abrirModalEditar = () => {
     document.getElementById("editarObservaciones").value = cassetteSeleccionado.getAttribute("data-observaciones");
 
     modalEditar.classList.remove("hidden");
-    modalOverlay.classList.remove("hidden"); // Mostrar el fondo grisáceo
+    modalOverlay.classList.remove("hidden");
 };
 
 // Función para cerrar el modal de editar
 const cerrarModalEditar = () => {
     modalEditar.classList.add("hidden");
-    modalOverlay.classList.add("hidden"); // Ocultar el fondo grisáceo
+    modalOverlay.classList.add("hidden");
 };
 
 // Guardar cambios al editar
 const guardarEdicionCassette = (event) => {
     event.preventDefault();
+    // Verificar si el cassete seleccionado existe
     if (!cassetteSeleccionado) return;
 
-    // Obtener nuevos valores
+    // Actualiza los nuevos valores en la fila
     cassetteSeleccionado.cells[1].textContent = document.getElementById("editarDescripcion").value;
     cassetteSeleccionado.cells[0].textContent = document.getElementById("editarFecha").value;
     cassetteSeleccionado.cells[2].textContent = document.getElementById("editarOrgano").value;
@@ -281,11 +303,6 @@ const guardarEdicionCassette = (event) => {
     mostrarDetallesCassette(cassetteSeleccionado);
     cerrarModalEditar();
 };
-
-
-
-
-
 
 
 /* ###########################
@@ -311,19 +328,12 @@ ordenarFechaBtn.addEventListener("click", () => ordenarTabla(0));
 ordenarDescripcionBtn.addEventListener("click", () => ordenarTabla(1));
 ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
 
-document.addEventListener("DOMContentLoaded", () => {
-    agregarEventosDetalle();
-});
-
+// Event Listener para los modales de eliminar y editar cassettes
 editarCassetteBtn.addEventListener("click", abrirModalEditar);
 eliminarCassetteBtn.addEventListener("click", abrirModalEliminar);
-document.getElementById("confirmarEliminar").addEventListener("click", eliminarCassette);
-document.getElementById("cancelarEliminar").addEventListener("click", cerrarModalEliminar);
-document.getElementById("cerrarEliminarModal").addEventListener("click", cerrarModalEliminar);
-document.getElementById("cerrarEditarModal").addEventListener("click", cerrarModalEditar);
-document.getElementById("formEditarCassette").addEventListener("submit", guardarEdicionCassette);
 
-// Event Listeners
+// Event Listeners para detalles cassettes
+document.addEventListener("DOMContentLoaded", agregarEventosDetalle);
 document.getElementById("confirmarEliminar").addEventListener("click", eliminarCassette);
 document.getElementById("cancelarEliminar").addEventListener("click", cerrarModalEliminar);
 document.getElementById("cerrarEliminarModal").addEventListener("click", cerrarModalEliminar);

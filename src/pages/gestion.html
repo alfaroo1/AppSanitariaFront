@@ -20,8 +20,9 @@
                 <option value="">Seleccionar un Órgano</option>
                 <option value="Bazo">Bazo</option>
                 <option value="Hígado">Hígado</option>
-            </select>     
-            <!-- Input de Escaner QR (no funcional)-->       
+            </select>
+            <!-- Input de Escaner QR (no funcional)-->
+             <!--! Input de escaner qr no funcional, se le podría poner opacity-0 -->      
             <input type="text" placeholder="Escanear QR" class="text-center border border-teal-500 rounded-md p-2 hover:bg-teal-100 hover:border-teal-600 focus:bg-teal-200 focus:border-teal-700">
             <!-- Input para seleccionar fecha única o rango -->
             <input type="date" id="fechaInicio" class="border border-teal-500 rounded-md p-2 hover:bg-teal-100">
@@ -48,6 +49,7 @@
                                 </svg>
                             </div>
                         </div>
+                        <!--! Botón de duplica no funcional -->
                         <!-- Ícono de duplicar -->
                         <div class="w-8 h-8 text-teal-600 icono hover:text-teal-400 active:text-teal-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
@@ -193,7 +195,7 @@
         <!-- Modal Formulario de añadir Cassettes -->
         <!-- Fondo grisacio -->
         <div id="modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden"></div>
-        <!-- Modal de formulario -->
+        <!-- Modal de añadir cassette -->
         <div id="modal" class="fixed inset-0 flex items-center justify-center hidden">
             <div id="modal-content" class="bg-white p-6 rounded-lg shadow-lg w-[500px] max-w-full transform scale-95 opacity-0 transition-all duration-300">
                 <div class="flex justify-between items-center mb-6">
@@ -221,7 +223,7 @@
             </div>
         </div>
 
-        <!-- MODAL PARA CONFIRMAR ELIMINACIÓN -->
+        <!-- Modal de eliminar cassette -->
         <div id="modalEliminarCassette" class="fixed inset-0 flex items-center justify-center hidden">
             <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] max-w-full transform scale-95 transition-all duration-300">
                 <div class="flex justify-between items-center mb-6">
@@ -239,7 +241,7 @@
             </div>
         </div>
 
-        <!-- MODAL PARA EDITAR CASSETTE -->
+        <!-- Modal de modificar cassette -->
         <div id="modalEditarCassette" class="fixed inset-0 flex items-center justify-center hidden">
             <div id="modalEditarContent" class="bg-white p-6 rounded-lg shadow-lg w-[500px] max-w-full transform scale-95 transition-all duration-300">
                 <div class="flex justify-between items-center mb-6">

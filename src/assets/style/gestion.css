@@ -3,6 +3,7 @@
 
 */
 
+/* Iconos */
 .icono {
     transition: transform 0.2s ease-in-out, color 0.2s ease-in-out;
 }
@@ -13,6 +14,7 @@
     transform: scale(1);
 }
 
+/* Dejar espacio en Detalles Cassettes para los datos a añadir*/
 .detalle-texto {
     min-height: 25px;
     display: block;
