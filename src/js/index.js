@@ -5,12 +5,10 @@ let modalRecuperar = document.getElementById('recuperar');
 let btn_login = document.getElementById('btn_login');
 let btn_register = document.getElementById('btn_registro');
 let btn_recuperar = document.getElementById('btn_recuperar')
-let logPass = document.getElementById('login_password');
-let regPass = document.getElementById('register_password');
-let regPass2 = document.getElementById('register_password2');
 let btnShowPass = document.getElementById('login_show-pass')
 let btnShowPassReg = document.getElementById('register_show-pass')
-let btnShowPassReg2 = document.getElementById('register_show-pass2')
+let btnShowPassReg2 = document.getElementById('register_show-pass2');
+const importToke = require('jsonwebtoken');
 //FUNCIONES
 
 //Cambiar de modal
@@ -47,7 +45,18 @@ const changeIconEye = (btn) =>{
     spanEye.classList.toggle('mdi-eye-outline');
     spanEye.classList.toggle('mdi-eye-off-outline');
 }
+//Coporbar si existe el user
+const compUser = (event) =>{
 
+    let user = validateLoginUser(event);
+    const token = importToke.j
+
+    
+}
+//Validacion de inicio de sesion
+const loginUser = (event) =>{
+    validateLoginUser(event)
+}
 //EVENTOS
 container.addEventListener('click',changeModal);
 btnShowPass.addEventListener('click', () => {
@@ -62,3 +71,5 @@ btnShowPassReg2.addEventListener('click', () => {
     showPass(regPass2);
     changeIconEye(btnShowPassReg2);
 });
+btn_login.addEventListener('click', loginUser);
+btn_register.addEventListener('click',createUser)
