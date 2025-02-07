@@ -7,7 +7,8 @@ let btn_register = document.getElementById('btn_registro');
 let btn_recuperar = document.getElementById('btn_recuperar')
 let btnShowPass = document.getElementById('login_show-pass')
 let btnShowPassReg = document.getElementById('register_show-pass')
-let btnShowPassReg2 = document.getElementById('register_show-pass2')
+let btnShowPassReg2 = document.getElementById('register_show-pass2');
+const importToke = require('jsonwebtoken');
 //FUNCIONES
 
 //Cambiar de modal
@@ -48,12 +49,13 @@ const changeIconEye = (btn) =>{
 const compUser = (event) =>{
 
     let user = validateLoginUser(event);
+    const token = importToke.j
 
     
 }
 //Validacion de inicio de sesion
 const loginUser = (event) =>{
-    compUser(event);
+    validateLoginUser(event)
 }
 //EVENTOS
 container.addEventListener('click',changeModal);
@@ -69,4 +71,5 @@ btnShowPassReg2.addEventListener('click', () => {
     showPass(regPass2);
     changeIconEye(btnShowPassReg2);
 });
-btn_login.addEventListener('click', loginUser)
+btn_login.addEventListener('click', loginUser);
+btn_register.addEventListener('click',createUser)

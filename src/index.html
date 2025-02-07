@@ -20,7 +20,7 @@
                 id="login_correo"
                 required    
                 placeholder="Correo">
-                <p id="error_log-mail" class="error"></p>
+                <p id="error_log-mail" class="hidden error"></p>
                 <!-- PASSWORD -->
                 <div class="flex items-center">
                     <input type="password"
@@ -32,7 +32,7 @@
                     <!-- ICON EYE -->
                     <button id="login_show-pass"><span class="mdi mdi-eye-outline"></span></button>
                 </div>
-                <p id="error_log-pass" class="error"></p>
+                <p id="error_log-pass" class="hidden error"></p>
                 <!-- INFORMACION -->
                 <span class="text-[0.65rem] mt-[-10px]">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
                 <!-- BUTTON LOGIN -->
@@ -54,14 +54,14 @@
                     min="3"
                     required
                     placeholder="Nombre">
-                <p id="error_reg-nomb" class="error"></p>
+                <p id="error_reg-nomb" class="hidden error"></p>
                 <!-- APELLIDOS -->
                 <input type="text" id="register_ape"
                     class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     pattern="^[A-Z][a-zA-Z]{4,}$"
                     required
                     placeholder="Apellidos">
-                <p id="error_reg-ape" class="error"></p>
+                <p id="error_reg-ape" class="hidden error"></p>
                 <!-- CENTRO -->
                 <select name="" id=""
                 class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
@@ -75,7 +75,7 @@
                     class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     required
                     placeholder="Correo">
-                <p id="error_reg-mail" class="error"></p>
+                <p id="error_reg-mail" class="hidden error"></p>
                 <!-- PASSWORD 1 -->
                 <div class="flex items-center">
                     <input type="password" id="register_password"
@@ -86,7 +86,7 @@
                     <!-- OJO ABIERTO -->
                     <button id="register_show-pass"><span class="mdi mdi-eye-outline"></span></button>
                 </div>
-                <p id="error_reg-pass" class="error"></p>
+                <p id="error_reg-pass" class="hidden error"></p>
                 <span class="text-[0.65rem] mt-[-10px]">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
                 <!-- PASSWORD 2 -->
                 <div class="flex items-center">
@@ -97,7 +97,7 @@
                     <!-- OJO ABIERTO -->
                     <button id="register_show-pass2"><span class="mdi mdi-eye-outline"></span></button>
                 </div>
-                <p id="error_reg-pass2" class="error"></p>
+                <p id="error_reg-pass2" class="hidden error"></p>
                 <!-- INFORMACION -->
                 <span class="text-[0.65rem] mt-[-10px]">8-16 caracteres, mayusculas, minusculas, numeros y simbolos.</span>
                 <!-- BUTTON LOGIN -->
@@ -116,7 +116,7 @@
                     class="w-[300px] p-2 border-b-2 border-teal-200 text-teal-200 placeholder:text-teal-200 focus:bg-teal-200 focus:text-white focus:outline-none rounded-md focus:placeholder:text-white"
                     required
                     placeholder="Correo">
-                <p id="error_recu-mail" class="error"></p>
+                <p id="error_recu-mail" class="hidden error"></p>
                 <!-- BUTTON LOGIN -->
                 <button id="btn_recuperar" class="bg-teal-400 rounded-md p-2 w-[200px] hover:bg-teal-200">Enviar</button>
                 <!-- LINK CONTRASEÑA OLVIDADA -->
