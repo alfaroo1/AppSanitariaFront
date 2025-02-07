@@ -39,7 +39,7 @@
                     <div class="flex">
                         <!-- Ícono de agregar archivo -->
                         <div id="openModalBtn" class="relative w-8 h-8 text-teal-600 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 hover:text-teal-400 active:text-teal-700" viewBox="0 0 24 24" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 icono hover:text-teal-400 active:text-teal-700" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V8L14 2Z"></path>
                             </svg>
                             <div class="absolute bottom-0 right-0 bg-white border-2 border-teal-600 rounded-full p-0.5">
@@ -89,13 +89,13 @@
                     <h2 class="text-xl font-semibold text-teal-700">Detalle Cassette</h2>
                     <div class="flex space-x-2">
                         <!-- Ícono de eliminar -->
-                        <div class="w-8 h-8 text-teal-600 hover:text-teal-400 active:text-teal-700 cursor-pointer">
+                        <div id="btnEliminarCassette" class="w-8 h-8 text-teal-600 hover:text-teal-400 icono active:text-teal-700 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M6 7H18M9 7V5H15V7M10 11V17M14 11V17M4 7H20L19 20H5L4 7Z"></path>
                             </svg>
                         </div>
                         <!-- Ícono de editar-->
-                        <div class="w-8 h-8 text-teal-600 hover:text-teal-400 active:text-teal-700 cursor-pointer">
+                        <div id="btnEditarCassette" class="w-8 h-8 text-teal-600 hover:text-teal-400 icono active:text-teal-700 cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M4 20H8L18 10L14 6L4 16V20Z"></path>
                                 <path d="M14 6L16 4L20 8L18 10L14 6Z"></path>
@@ -109,29 +109,29 @@
                     
                     <div class="border-b border-gray-300 pb-3">
                         <p class="font-bold uppercase text-sm">Descripción:</p>
-                        <p id="descripcion" class="text-gray-600 break-words"></p>
+                        <p id="descripcion" class="text-gray-600 break-words detalle-texto"></p>
                     </div>
 
                     <!-- Contenedor de Órgano y Fecha con flex -->
                     <div class="border-b border-gray-300 pb-3 flex justify-between items-center flex-wrap">
                         <div class="flex-1 min-w-0">
                             <p class="font-bold uppercase text-sm">Órgano:</p>
-                            <p id="organo" class="text-gray-600 truncate"></p>
+                            <p id="organo" class="text-gray-600 truncate detalle-texto"></p>
                         </div>
                         <div class="flex-1 min-w-0 text-right">
                             <p class="font-bold uppercase text-sm">Fecha:</p>
-                            <p id="fecha" class="text-gray-600 truncate"></p>
+                            <p id="fecha" class="text-gray-600 truncate detalle-texto"></p>
                         </div>
                     </div>
 
                     <div class="border-b border-gray-300 pb-3">
                         <p class="font-bold uppercase text-sm">Características:</p>
-                        <p id="caracteristicas" class="text-gray-600 break-words"></p>
+                        <p id="caracteristicas" class="text-gray-600 break-words detalle-texto"></p>
                     </div>
 
                     <div>
                         <p class="font-bold uppercase text-sm">Observaciones:</p>
-                        <p id="observaciones" class="text-gray-600 break-words"></p>
+                        <p id="observaciones" class="text-gray-600 break-words detalle-texto"></p>
                     </div>
                     
                 </div>
@@ -190,7 +190,7 @@
         </div>
 
 
-        <!-- Formulario de añadir Cassettes -->
+        <!-- Modal Formulario de añadir Cassettes -->
         <!-- Fondo grisacio -->
         <div id="modal-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 hidden"></div>
         <!-- Modal de formulario -->
@@ -221,7 +221,49 @@
             </div>
         </div>
 
+        <!-- MODAL PARA CONFIRMAR ELIMINACIÓN -->
+        <div id="modalEliminarCassette" class="fixed inset-0 flex items-center justify-center hidden">
+            <div class="bg-white p-6 rounded-lg shadow-lg w-[400px] max-w-full transform scale-95 transition-all duration-300">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-semibold text-red-600">Eliminar Cassette</h2>
+                    <button id="cerrarEliminarModal" class="text-gray-600 hover:text-gray-800">&times;</button>
+                </div>
+                <p class="text-gray-700 mb-4 text-center">
+                    ¿Desea eliminar el Cassette? <br>
+                    <span class="text-sm text-gray-500">Esta acción no se puede deshacer.</span>
+                </p>
+                <div class="flex justify-between">
+                    <button id="cancelarEliminar" class="w-1/2 bg-gray-400 text-white p-2 rounded-md hover:bg-gray-500">Cancelar</button>
+                    <button id="confirmarEliminar" class="w-1/2 bg-red-500 text-white p-2 rounded-md hover:bg-red-700">Eliminar</button>
+                </div>
+            </div>
+        </div>
 
+        <!-- MODAL PARA EDITAR CASSETTE -->
+        <div id="modalEditarCassette" class="fixed inset-0 flex items-center justify-center hidden">
+            <div id="modalEditarContent" class="bg-white p-6 rounded-lg shadow-lg w-[500px] max-w-full transform scale-95 transition-all duration-300">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 id="tituloEditarModal" class="text-xl font-semibold text-teal-700">Modificar Cassette</h2>
+                    <button id="cerrarEditarModal" class="text-gray-600 hover:text-gray-800">&times;</button>
+                </div>
+                <form id="formEditarCassette">
+                    <input type="text" id="editarDescripcion" placeholder="Descripción Corta *" class="w-full p-2 border rounded-md mb-4">
+                    <div class="flex gap-4 mb-3">
+                        <input type="date" id="editarFecha" class="w-1/2 p-2 border rounded-md">
+                        <select id="editarOrgano" class="w-1/2 p-2 border rounded-md">
+                            <option value="Bazo">Bazo</option>
+                            <option value="Hígado">Hígado</option>
+                        </select>
+                    </div>
+                    <textarea id="editarCaracteristicas" placeholder="Características" class="w-full p-2 border rounded-md"></textarea>
+                    <textarea id="editarObservaciones" placeholder="Observaciones" class="w-full p-2 border rounded-md"></textarea>
+                    
+                    <p id="errorEditar" class="text-red-500 text-sm mt-2"></p>
+                    
+                    <button type="submit" class="w-full bg-teal-500 text-white p-2 rounded-md hover:bg-teal-700 mt-4">Guardar Cambios</button>
+                </form>
+            </div>
+        </div>
 
         
     </div>

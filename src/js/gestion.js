@@ -43,8 +43,17 @@ const detalleOrgano = document.getElementById("organo");
 const detalleCaracteristicas = document.getElementById("caracteristicas");
 const detalleObservaciones = document.getElementById("observaciones");
 
-let ordenAscendente = true;
+// Eliminar y modificar cassettes
+const editarCassetteBtn = document.getElementById("btnEditarCassette");
+const eliminarCassetteBtn = document.getElementById("btnEliminarCassette");
 
+// Modales eliminar y modificar cassettes
+const modalEliminar = document.getElementById("modalEliminarCassette");
+const modalEditar = document.getElementById("modalEditarCassette");
+
+
+let ordenAscendente = true;
+let cassetteSeleccionado = null;
 
 /* ###############################################
    ###   Funcines del Modal Añadir Cassettes   ###
@@ -176,13 +185,15 @@ const ordenarTabla = (columna) => {
 
 // Función para actualizar el detalle del cassette seleccionado
 const mostrarDetallesCassette = (fila) => {
+    cassetteSeleccionado = fila
 
     // Actualizar la sección de detalles
     detalleDescripcion.textContent = fila.cells[1].textContent;
     detalleFecha.textContent = fila.cells[0].textContent;
     detalleOrgano.textContent = fila.cells[2].textContent;
     detalleCaracteristicas.innerText = fila.getAttribute("data-caracteristicas") || "Información no disponible";
-    detalleObservaciones.innerText = fila.getAttribute("data-observaciones") || "Sin observaciones";    
+    detalleObservaciones.innerText = fila.getAttribute("data-observaciones") || "Sin observaciones";
+    
 
     // Resaltar la fila seleccionada
     document.querySelectorAll("#cassetteTableBody tr").forEach(row => row.classList.remove("bg-teal-100"));
@@ -198,6 +209,82 @@ const agregarEventosDetalle = () => {
         }
     });
 };
+
+
+/* ################################################
+   ###   Funciones botones Detalles Cassettes   ###
+   ##############################################*/
+
+// Función para abrir el modal de eliminar
+const abrirModalEliminar = () => {
+    if (!cassetteSeleccionado || !modalEliminar) return;
+    modalEliminar.classList.remove("hidden");
+    modalOverlay.classList.remove("hidden"); // Mostrar el fondo grisáceo
+};
+
+// Función para cerrar el modal de eliminar
+const cerrarModalEliminar = () => {
+    modalEliminar.classList.add("hidden");
+    modalOverlay.classList.add("hidden"); // Ocultar el fondo grisáceo
+};
+
+// Función para eliminar cassette
+const eliminarCassette = () => {
+    if (!cassetteSeleccionado) return;
+    
+    if (cassetteSeleccionado === document.querySelector(".bg-teal-100")) {
+        detalleDescripcion.textContent = "";
+        detalleFecha.textContent = "";
+        detalleOrgano.textContent = "";
+        detalleCaracteristicas.textContent = "";
+        detalleObservaciones.textContent = "";
+    }
+
+    cassetteSeleccionado.remove();
+    cassetteSeleccionado = null;
+    cerrarModalEliminar();
+};
+
+
+// Función para abrir el modal de editar
+const abrirModalEditar = () => {
+    if (!cassetteSeleccionado || !modalEditar) return;
+    
+    document.getElementById("editarDescripcion").value = cassetteSeleccionado.cells[1].textContent;
+    document.getElementById("editarFecha").value = cassetteSeleccionado.cells[0].textContent;
+    document.getElementById("editarOrgano").value = cassetteSeleccionado.cells[2].textContent;
+    document.getElementById("editarCaracteristicas").value = cassetteSeleccionado.getAttribute("data-caracteristicas");
+    document.getElementById("editarObservaciones").value = cassetteSeleccionado.getAttribute("data-observaciones");
+
+    modalEditar.classList.remove("hidden");
+    modalOverlay.classList.remove("hidden"); // Mostrar el fondo grisáceo
+};
+
+// Función para cerrar el modal de editar
+const cerrarModalEditar = () => {
+    modalEditar.classList.add("hidden");
+    modalOverlay.classList.add("hidden"); // Ocultar el fondo grisáceo
+};
+
+// Guardar cambios al editar
+const guardarEdicionCassette = (event) => {
+    event.preventDefault();
+    if (!cassetteSeleccionado) return;
+
+    // Obtener nuevos valores
+    cassetteSeleccionado.cells[1].textContent = document.getElementById("editarDescripcion").value;
+    cassetteSeleccionado.cells[0].textContent = document.getElementById("editarFecha").value;
+    cassetteSeleccionado.cells[2].textContent = document.getElementById("editarOrgano").value;
+    cassetteSeleccionado.setAttribute("data-caracteristicas", document.getElementById("editarCaracteristicas").value);
+    cassetteSeleccionado.setAttribute("data-observaciones", document.getElementById("editarObservaciones").value);
+
+    mostrarDetallesCassette(cassetteSeleccionado);
+    cerrarModalEditar();
+};
+
+
+
+
 
 
 
@@ -227,3 +314,18 @@ ordenarOrganoBtn.addEventListener("click", () => ordenarTabla(2));
 document.addEventListener("DOMContentLoaded", () => {
     agregarEventosDetalle();
 });
+
+editarCassetteBtn.addEventListener("click", abrirModalEditar);
+eliminarCassetteBtn.addEventListener("click", abrirModalEliminar);
+document.getElementById("confirmarEliminar").addEventListener("click", eliminarCassette);
+document.getElementById("cancelarEliminar").addEventListener("click", cerrarModalEliminar);
+document.getElementById("cerrarEliminarModal").addEventListener("click", cerrarModalEliminar);
+document.getElementById("cerrarEditarModal").addEventListener("click", cerrarModalEditar);
+document.getElementById("formEditarCassette").addEventListener("submit", guardarEdicionCassette);
+
+// Event Listeners
+document.getElementById("confirmarEliminar").addEventListener("click", eliminarCassette);
+document.getElementById("cancelarEliminar").addEventListener("click", cerrarModalEliminar);
+document.getElementById("cerrarEliminarModal").addEventListener("click", cerrarModalEliminar);
+document.getElementById("cerrarEditarModal").addEventListener("click", cerrarModalEditar);
+document.getElementById("formEditarCassette").addEventListener("submit", guardarEdicionCassette);
